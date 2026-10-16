@@ -119,9 +119,9 @@ def main():
 <p class="meta">By {esc(n.get("byline", "Jarysh Staff"))} &middot; {nice(n["d"])}</p>
 <figure><img src="../img/{n["image"]}" alt="{esc(n.get("caption", ""))}"><figcaption>{inline(n.get("caption", ""))}</figcaption></figure>
 {paras(n["body"])}</article>{cm}</div>
-<aside><div class="ad"><a href="../odds.html#partner"><img src="../img/ads/steppe-300.png" width="300" height="250" alt="Steppe Gaming"></a></div>
+<aside><div class="ad"><a href="../odds.html#partner"><img src="../img/ads/steppe-300.webp" width="300" height="250" alt="Steppe Gaming"></a></div>
 <div class="box"><h2>MORE NEWS</h2>{"".join(f'<p><a href="{o["slug"]}.html">{esc(o["headline"])}</a></p>' for o in news if o is not n)}</div>
-<div class="ad"><a href="../style.html"><img src="../img/ads/hats-300.png" width="300" height="250" alt="Texas Hat House"></a></div></aside></div>'''
+<div class="ad"><a href="../style.html"><img src="../img/ads/hats-300.webp" width="300" height="250" alt="Texas Hat House"></a></div><div class="ad"><a href="../go.html"><img src="../img/ads/pinkfilly-300.webp" width="300" height="250" alt="The Pink Filly gentlemen\'s club"></a></div></aside></div>'''
         urls.append((page(f'news/{n["slug"]}.html', f'{n["headline"]} | JARYSH', body, n.get("summary", ""), 1, og="img/" + n["image"]), n["date"]))
     urls.append((page("news/index.html", "News | JARYSH", "<h1>NEWS</h1>" + cards("../", news), "Ulak, horse games and Ulak Nights news from Jarysh.", 1), news[0]["date"]))
 

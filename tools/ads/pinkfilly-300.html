@@ -1,0 +1,55 @@
+<!DOCTYPE html><html><head><meta charset="utf-8">
+<meta name="ad" content="out=pinkfilly-300 w=300 h=250 dur=2400 fps=15 poster=0">
+<link rel="stylesheet" href="ad.css">
+<style>
+body { width: 300px; height: 250px; background: #0a0008; }
+.flash { inset: 0; background: radial-gradient(circle at 30% 55%, #ff4fb0 0%, #ff1d8e 30%, #7a0048 62%, #14000c 100%); animation: flash 1.2s steps(1) infinite; }
+@keyframes flash { 0% { opacity: 1 } 25% { opacity: .55 } 50% { opacity: 1; filter: brightness(1.35) } 62% { opacity: .35 } 75% { opacity: 1 } }
+.rays { left: -150px; top: -150px; width: 600px; height: 600px; background: repeating-conic-gradient(from 0deg at 50% 50%, rgba(255,255,255,.13) 0 6deg, transparent 6deg 18deg); animation: spin 2.4s linear infinite; mix-blend-mode: screen; }
+@keyframes spin { to { transform: rotate(60deg) } }
+.dancer { left: 8px; bottom: 26px; height: 196px; transform-origin: 50% 100%; animation: flip 1.2s steps(1) infinite; filter: drop-shadow(0 0 6px rgba(255,80,170,.9)); }
+.dancer img { height: 196px; display: block; animation: sway .6s ease-in-out infinite alternate; transform-origin: 50% 100%; }
+@keyframes flip { 0% { transform: scaleX(1) } 50% { transform: scaleX(-1) } }
+@keyframes sway { from { transform: rotate(-4deg) } to { transform: rotate(4deg) } }
+.neon { color: #fff0f8; text-shadow: 0 0 2px #fff, 0 0 5px #ff6fbf, 0 0 11px #ff1d8e, 0 0 22px #ff1d8e, 0 0 36px #ff1d8e; }
+.cyan { color: #e8ffff; text-shadow: 0 0 2px #fff, 0 0 6px #3ff, 0 0 14px #0cf; }
+.yel { color: #fff8d0; text-shadow: 0 0 2px #fff, 0 0 6px #ffd23f, 0 0 14px #ffb300; }
+.box { right: 8px; top: 14px; width: 190px; text-align: center; }
+.the { font: 20px "TeX Gyre Chorus"; line-height: 1; text-align: left; padding-left: 18px; }
+.name { font: 44px/0.95 "TeX Gyre Chorus"; white-space: nowrap; margin-top: -4px; animation: flick 2.4s steps(1) infinite; }
+@keyframes flick { 0%, 41%, 46%, 100% { opacity: 1 } 42% { opacity: .25 } 44% { opacity: .9 } 45% { opacity: .2 } }
+.gc { font: 700 12px "TeX Gyre Heros Cn"; letter-spacing: .26em; margin-top: 4px; white-space: nowrap; }
+.live { font: 900 italic 19px "Inter Display"; margin-top: 12px; white-space: nowrap; letter-spacing: -.01em; animation: pulse .6s ease-in-out infinite alternate; }
+@keyframes pulse { from { transform: scale(1) } to { transform: scale(1.07) } }
+.hrs { font: 700 17px "TeX Gyre Heros Cn"; letter-spacing: .08em; margin-top: 2px; }
+.vip { font: 700 11.5px "TeX Gyre Heros Cn"; letter-spacing: .14em; margin-top: 8px; color: #ffd6ec; }
+.strip { left: 0; right: 0; bottom: 0; height: 22px; background: #000; border-top: 1px solid #ff1d8e; font: 700 10px/22px "TeX Gyre Heros Cn"; text-align: center; letter-spacing: .04em; color: #ffc2e2; }
+.strip b { color: #fff; }
+.bulb { width: 6px; height: 6px; border-radius: 50%; background: #ffe9a8; box-shadow: 0 0 5px #ffcf4a; animation: chase .4s steps(1) infinite; }
+.bulb.o { animation-delay: -.2s; }
+@keyframes chase { 0% { opacity: 1 } 50% { opacity: .15 } }
+.age { left: 104px; bottom: 30px; font: 900 11px "Inter Display"; border: 1.5px solid #fff; border-radius: 50%; width: 26px; height: 26px; line-height: 23px; text-align: center; }
+</style></head><body>
+<div class="abs flash"></div>
+<div class="abs rays"></div>
+<div class="abs dancer"><img src="../../img/src/sil/dancer.svg" alt=""></div>
+<div class="abs box">
+  <div class="the neon">The</div>
+  <div class="name neon">Pink Filly</div>
+  <div class="gc cyan">GENTLEMEN'S CLUB</div>
+  <div class="live yel">LIVE GIRLS NIGHTLY</div>
+  <div class="hrs neon">22:00 – 06:00</div>
+  <div class="vip">VIP ROOMS · BOTTLE SERVICE<br>AIGYR 2-FOR-1 TILL MIDNIGHT</div>
+</div>
+
+<div class="abs strip">18+ · Chuy Ave, Talas · <b>Ulak Nights ticket = FREE ENTRY</b> till 00:00</div>
+<script>
+// marquee bulbs round the edge
+const W = 300, H = 228, step = 14; let n = 0;
+const add = (x, y) => { const b = document.createElement('div'); b.className = 'abs bulb' + (n++ % 2 ? ' o' : ''); b.style.left = (x - 3) + 'px'; b.style.top = (y - 3) + 'px'; document.body.appendChild(b); };
+for (let x = 6; x <= W - 6; x += step) add(x, 5);
+for (let y = 5 + step; y <= H - 6; y += step) add(W - 5, y);
+for (let x = W - 6 - step; x >= 6; x -= step) add(x, H - 5);
+for (let y = H - 5 - step; y > 5; y -= step) add(5, y);
+</script>
+</body></html>

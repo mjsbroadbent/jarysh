@@ -1,0 +1,46 @@
+<!DOCTYPE html><html><head><meta charset="utf-8">
+<meta name="ad" content="out=aigyr-300 w=300 h=250 dur=6000 fps=12 poster=4800 q=74">
+<link rel="stylesheet" href="ad.css">
+<style>
+body { width: 300px; height: 250px; background: #0e0904; }
+.sceneA, .sceneB { inset: 0; overflow: hidden; }
+.sceneA { animation: a 6s infinite; } .sceneB { animation: b 6s infinite; }
+@keyframes a { 0%, 46% { opacity: 1 } 52%, 96% { opacity: 0 } 100% { opacity: 1 } }
+@keyframes b { 0%, 46% { opacity: 0 } 52%, 96% { opacity: 1 } 100% { opacity: 0 } }
+.girl { left: 0; top: 0; width: 300px; height: 250px; background: url(../../img/aigyrgirl.jpg) 50% 22% / 300px auto no-repeat; animation: kb 6s linear infinite; transform-origin: 40% 30%; }
+@keyframes kb { from { transform: scale(1.02) } 50% { transform: scale(1.12) } to { transform: scale(1.02) } }
+.shade { left: 0; right: 0; bottom: 0; height: 110px; background: linear-gradient(180deg, transparent, rgba(0,0,0,.85)); }
+.q { left: 0; right: 0; bottom: 24px; text-align: center; font: 900 italic 34px/1 "Inter Display"; letter-spacing: -.03em; color: #fff; -webkit-text-stroke: 1px #000; filter: drop-shadow(0 3px 0 #000); }
+.q span { color: #ffd23f; }
+.q2 { left: 0; right: 0; bottom: 8px; text-align: center; font: 700 11px "TeX Gyre Heros Cn"; letter-spacing: .14em; color: #ffe9b0; }
+.mini { right: 8px; top: 8px; width: 54px; }
+.pourbg { left: 90px; right: 0; top: 0; bottom: 0; -webkit-mask-image: linear-gradient(90deg, transparent, #000 40%); background: url(../../img/src/pour.png) 60% 50% / 520px auto no-repeat; opacity: .45; filter: saturate(1.2); }
+.can { left: 0; top: 14px; width: 124px; height: 226px; background: url(../../img/aigyr-can.jpg) 50% 45% / 206px auto no-repeat; -webkit-mask-image: radial-gradient(ellipse 48% 52% at 50% 50%, #000 70%, transparent 100%); animation: can 6s ease-out infinite; }
+@keyframes can { 0%, 48% { transform: translateX(-60px) rotate(-8deg); opacity: 0 } 56%, 100% { transform: none; opacity: 1 } }
+.wm { left: 120px; top: 14px; width: 174px; }
+.ride { left: 128px; top: 92px; white-space: nowrap; font: 900 italic 27px/1 "Inter Display"; letter-spacing: -.03em; color: #fff; filter: drop-shadow(0 2px 0 #000); }
+.drink { left: 128px; top: 121px; white-space: nowrap; font: 900 italic 27px/1 "Inter Display"; letter-spacing: -.03em; filter: drop-shadow(0 2px 0 #000); }
+.burst { left: 150px; top: 176px; width: 118px; height: 50px; background: #d4101c; border: 2px solid #ffd23f; border-radius: 6px; transform: rotate(-5deg);
+  display: flex; flex-direction: column; align-items: center; justify-content: center; animation: wob .5s ease-in-out infinite alternate; }
+@keyframes wob { from { transform: rotate(-7deg) } to { transform: rotate(-2deg) scale(1.06) } }
+.burst b { font: 900 italic 22px/1 "Inter Display"; } .burst span { font: 700 10px "TeX Gyre Heros Cn"; letter-spacing: .08em; }
+.resp { left: 160px; top: 236px; font: 8.5px "TeX Gyre Heros Cn"; color: #c9b48a; }
+.line { left: 129px; top: 154px; white-space: nowrap; font: 700 10px/12px "TeX Gyre Heros Cn"; letter-spacing: .06em; color: #ffe9b0; }
+</style></head><body>
+<div class="abs sceneA">
+  <div class="abs girl"></div><div class="abs shade"></div>
+  <img class="abs mini" src="../../img/aigyr-crest.svg" alt="">
+  <div class="abs q">THIRSTY, <span>COWBOY?</span></div>
+  <div class="abs q2">AIGYR GIRLS AT EVERY ULAK NIGHT</div>
+</div>
+<div class="abs sceneB">
+  <div class="abs pourbg"></div>
+  <div class="abs can"></div>
+  <img class="abs wm" src="../../img/aigyr-wordmark.svg" alt="">
+  <div class="abs ride">RIDE HARD.</div>
+  <div class="abs drink gold">DRINK AIGYR.</div>
+  <div class="abs line">GOLD · STRONG · LIGHT</div>
+  <div class="abs burst"><b>2 FOR 1</b><span>TILL 20:00</span></div>
+  <div class="abs resp">Drink responsibly. 18+</div>
+</div>
+</body></html>

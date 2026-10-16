@@ -1,0 +1,12 @@
+/* shared by the jarysh.com ad templates (render-time only: fonts are the machine's, not web fonts) */
+* { box-sizing: border-box; margin: 0; padding: 0; }
+html, body { overflow: hidden; }
+body { position: relative; font-family: "TeX Gyre Heros Cn", "Arial Narrow", sans-serif; color: #fff; -webkit-font-smoothing: antialiased; }
+.abs { position: absolute; }
+.disp { font-family: "Inter Display", sans-serif; font-weight: 900; font-style: italic; letter-spacing: -.02em; }
+.cond { font-family: "TeX Gyre Heros Cn", sans-serif; font-weight: 700; }
+.serif { font-family: "TeX Gyre Bonum", serif; font-weight: 700; }
+.script { font-family: "TeX Gyre Chorus", cursive; }
+.gold { background: linear-gradient(180deg, #fffbe0 0%, #ffe680 18%, #f5b400 42%, #9a5e00 54%, #e7a90f 62%, #fff0a8 78%, #b67a06 100%);
+  -webkit-background-clip: text; background-clip: text; color: transparent; }
+.fine { font: 8.5px "TeX Gyre Heros Cn", sans-serif; letter-spacing: .02em; opacity: .75; }

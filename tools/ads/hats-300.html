@@ -1,0 +1,29 @@
+<!DOCTYPE html><html><head><meta charset="utf-8">
+<meta name="ad" content="out=hats-300 w=300 h=250 dur=4000 fps=12 poster=2000 q=74">
+<link rel="stylesheet" href="ad.css">
+<style>
+body { width: 300px; height: 250px; background: #2a1608; }
+.photo { inset: 0; background: url(../../img/hatshop.jpg) 50% 18% / 300px auto no-repeat; animation: kb 4s ease-in-out infinite alternate; filter: sepia(.25) saturate(1.1); }
+@keyframes kb { from { transform: scale(1.04) translateX(-4px) } to { transform: scale(1.1) translateX(4px) } }
+.sign { left: 10px; right: 10px; top: 8px; height: 50px; background: linear-gradient(180deg, #7a4a22, #4e2c10); border: 3px solid #e8c88a; border-radius: 6px; box-shadow: 0 4px 10px rgba(0,0,0,.6), inset 0 0 0 2px #2a1608; text-align: center; }
+.sign .t { font: 700 23px/1 "TeX Gyre Bonum"; color: #ffe6b0; letter-spacing: .06em; margin-top: 6px; text-shadow: 0 2px 0 #2a1608; }
+.sign .s { font: 700 10px "TeX Gyre Heros Cn"; color: #f0d29a; letter-spacing: .2em; margin-top: 2px; }
+.nail { width: 6px; height: 6px; border-radius: 50%; background: #c9a060; top: 28px; }
+.burst { right: 10px; top: 92px; width: 86px; height: 86px; background: #d4101c; clip-path: polygon(50% 0,61% 16%,79% 7%,80% 26%,98% 28%,88% 45%,100% 61%,82% 68%,85% 87%,66% 84%,56% 100%,44% 86%,26% 96%,22% 77%,3% 72%,13% 55%,0 38%,18% 31%,17% 11%,36% 15%);
+  display: flex; flex-direction: column; align-items: center; justify-content: center; animation: wob .5s ease-in-out infinite alternate; }
+@keyframes wob { from { transform: rotate(-8deg) } to { transform: rotate(6deg) scale(1.08) } }
+.burst b { font: 900 italic 24px/1 "Inter Display"; color: #fff; } .burst span { font: 700 11px "TeX Gyre Heros Cn"; letter-spacing: .1em; color: #fff; }
+.bar { left: 0; right: 0; bottom: 0; height: 58px; background: linear-gradient(180deg, rgba(0,0,0,.2), rgba(0,0,0,.88) 35%); text-align: center; }
+.bar .a { font: 700 22px/1 "TeX Gyre Bonum"; letter-spacing: .04em; color: #ffd76a; margin-top: 14px; text-shadow: 0 2px 0 #000; }
+.bar .b { font: 700 11px "TeX Gyre Heros Cn"; letter-spacing: .06em; color: #fff; margin-top: 4px; }
+.shine { top: 8px; left: 10px; width: 280px; height: 50px; overflow: hidden; border-radius: 6px; }
+.shine i { position: absolute; top: -10px; width: 30px; height: 80px; background: linear-gradient(90deg, transparent, rgba(255,240,200,.55), transparent); transform: skewX(-20deg); animation: sh 4s ease-in-out infinite; }
+@keyframes sh { 0% { left: -50px } 35%, 100% { left: 320px } }
+</style></head><body>
+<div class="abs photo"></div>
+<div class="abs sign"><div class="t">TEXAS HAT HOUSE</div><div class="s">CHUY AVENUE · TALAS · SINCE 2003</div></div>
+<div class="abs nail" style="left:18px"></div><div class="abs nail" style="right:18px"></div>
+<div class="abs shine"><i></i></div>
+<div class="abs burst"><b>-30%</b><span>BOOTS</span></div>
+<div class="abs bar"><div class="a">Real felt. Real cowboy.</div><div class="b">Show your Ulak Nights ticket: free hat band</div></div>
+</body></html>

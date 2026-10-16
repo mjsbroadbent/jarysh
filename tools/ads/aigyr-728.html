@@ -1,0 +1,49 @@
+<!DOCTYPE html><html><head><meta charset="utf-8">
+<meta name="ad" content="out=aigyr-728 w=728 h=90 dur=6000 fps=12 poster=1000 q=76">
+<link rel="stylesheet" href="ad.css">
+<style>
+body { width: 728px; height: 90px; background: linear-gradient(90deg, #0e0904 0%, #1e1306 55%, #2a1806 100%); }
+.pour { right: 0; top: 0; width: 360px; height: 90px; background: url(../../img/src/pour.png) 55% 62% / 420px auto no-repeat;
+  -webkit-mask-image: linear-gradient(90deg, transparent 0%, #000 45%); mask-image: linear-gradient(90deg, transparent 0%, #000 45%); }
+.wm { left: 8px; top: 3px; height: 84px; }
+.div { left: 196px; top: 14px; width: 2px; height: 62px; background: linear-gradient(180deg, transparent, #c98b0a, transparent); }
+.msg { left: 214px; top: 0; height: 90px; display: flex; align-items: center; opacity: 0; white-space: nowrap; }
+.m1 { animation: m1 6s infinite; } .m2 { animation: m2 6s infinite; } .m3 { animation: m3 6s infinite; }
+@keyframes m1 { 0% { opacity: 0; transform: translateX(-24px) } 4%, 28% { opacity: 1; transform: none } 33%, 100% { opacity: 0; transform: translateX(24px) } }
+@keyframes m2 { 0%, 33% { opacity: 0; transform: translateX(-24px) } 37%, 61% { opacity: 1; transform: none } 66%, 100% { opacity: 0; transform: translateX(24px) } }
+@keyframes m3 { 0%, 66% { opacity: 0; transform: scale(.7) } 71%, 95% { opacity: 1; transform: scale(1) } 100% { opacity: 0 } }
+.big { font: 900 italic 46px/1 "Inter Display"; letter-spacing: -.03em; filter: drop-shadow(0 3px 0 #000); }
+.white { color: #fff; }
+.burst { width: 88px; height: 88px; margin-right: 12px; background: #d4101c; clip-path: polygon(50% 0,61% 16%,79% 7%,80% 26%,98% 28%,88% 45%,100% 61%,82% 68%,85% 87%,66% 84%,56% 100%,44% 86%,26% 96%,22% 77%,3% 72%,13% 55%,0 38%,18% 31%,17% 11%,36% 15%);
+  display: flex; flex-direction: column; align-items: center; justify-content: center; color: #fff; text-align: center; animation: wob .5s ease-in-out infinite alternate; }
+@keyframes wob { from { transform: rotate(-6deg) scale(1) } to { transform: rotate(6deg) scale(1.06) } }
+.burst b { font: 900 italic 17px/1 "Inter Display"; white-space: nowrap; } .burst span { font: 700 9px "TeX Gyre Heros Cn"; letter-spacing: .08em; }
+.deal { font: 700 21px/1.1 "TeX Gyre Heros Cn"; letter-spacing: .04em; color: #fff; }
+.deal small { display: block; font-size: 13px; color: #ffd76a; letter-spacing: .12em; }
+.can { right: 10px; top: 2px; width: 62px; height: 86px; overflow: hidden; border-radius: 4px; }
+.can img { width: 150px; margin-left: -44px; margin-top: -12px; }
+.shine { top: -20px; left: 0; width: 26px; height: 130px; background: linear-gradient(90deg, transparent, rgba(255,255,255,.8), transparent); transform: skewX(-20deg); animation: sh 3s ease-in-out infinite; }
+@keyframes sh { 0% { left: -40px } 40%, 100% { left: 90px } }
+.bub { border-radius: 50%; border: 1px solid rgba(255,240,200,.75); background: radial-gradient(circle at 35% 35%, rgba(255,255,255,.7), rgba(255,220,120,.15) 60%); }
+.tag { right: 84px; bottom: 5px; font: 700 9px "TeX Gyre Heros Cn"; letter-spacing: .1em; color: #ffe9b0; text-shadow: 0 1px 2px #000; }
+</style></head><body>
+<div class="abs pour"></div>
+<img class="abs wm" src="../../img/aigyr-wordmark.svg" alt="">
+<div class="abs div"></div>
+<div class="abs msg m1"><span class="big white">RIDE HARD.</span></div>
+<div class="abs msg m2"><span class="big gold">DRINK AIGYR.</span></div>
+<div class="abs msg m3"><div class="burst"><b>2 FOR 1</b><span>TILL 20:00</span></div><div class="deal">ON THE AIGYR BEER DECK<small>EVERY ULAK NIGHT · STATE HIPPODROME</small></div></div>
+<div class="abs can"><img src="../../img/aigyr-can.jpg" alt=""><div class="abs shine"></div></div>
+<div class="abs tag">OFFICIAL BEER OF JARYSH · 18+</div>
+<script>
+const css = document.createElement('style'); let k = '';
+for (let i = 0; i < 18; i++) {
+  const x = 420 + (i * 37) % 210, s = 3 + (i * 7) % 6, d = 1.5 + (i % 3) * 0.75, dl = -((i * 0.37) % d);
+  k += `@keyframes b${i}{from{transform:translate(0,0);opacity:0}15%{opacity:1}to{transform:translate(${(i % 2 ? 6 : -6)}px,-100px);opacity:0}}`;
+  const b = document.createElement('div'); b.className = 'abs bub';
+  Object.assign(b.style, { left: x + 'px', top: '92px', width: s + 'px', height: s + 'px', animation: `b${i} ${d}s linear ${dl}s infinite` });
+  document.body.appendChild(b);
+}
+css.textContent = k; document.head.appendChild(css);
+</script>
+</body></html>

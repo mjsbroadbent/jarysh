@@ -1,0 +1,50 @@
+<!DOCTYPE html><html><head><meta charset="utf-8">
+<meta name="ad" content="out=power-300 w=300 h=250 dur=4000 fps=12 poster=2600 q=74">
+<link rel="stylesheet" href="ad.css">
+<style>
+body { width: 300px; height: 250px; background: radial-gradient(circle at 72% 40%, #1d6bff 0%, #0b2a7a 40%, #030a24 100%); }
+.flash { inset: 0; background: #e8f2ff; opacity: 0; animation: flash 4s infinite; }
+@keyframes flash { 0%, 1.5% { opacity: .9 } 3% { opacity: 0 } 4% { opacity: .6 } 6%, 100% { opacity: 0 } }
+.bolt { right: 92px; top: -6px; width: 60px; opacity: 0; animation: bolt 4s infinite; filter: drop-shadow(0 0 8px #9cf); }
+@keyframes bolt { 0%, 6% { opacity: 1 } 8%, 100% { opacity: 0 } }
+.head { right: -30px; top: 6px; height: 230px; opacity: .22; filter: invert(1) drop-shadow(0 0 10px #6af); transform: scaleX(-1); }
+.bottle { right: 22px; top: 66px; width: 74px; height: 128px; animation: bob 2s ease-in-out infinite alternate; }
+@keyframes bob { from { transform: translateY(0) rotate(4deg) } to { transform: translateY(-6px) rotate(6deg) } }
+.cap { left: 9px; top: 0; width: 56px; height: 20px; border-radius: 4px; background: linear-gradient(90deg, #111, #444 40%, #111); }
+.body { left: 0; top: 16px; width: 74px; height: 112px; border-radius: 12px; background: linear-gradient(90deg, #cfd6e0, #fff 35%, #fff 55%, #b9c2cf); }
+.label { left: 0; top: 38px; width: 74px; height: 62px; background: linear-gradient(180deg, #e3171e, #9c0b10); text-align: center; color: #fff; }
+.label .a { font: 700 10.5px "TeX Gyre Heros Cn"; letter-spacing: .14em; margin-top: 7px; }
+.label .b { font: 900 italic 19px/1 "Inter Display"; color: #ffd23f; }
+.label .c { font: 700 8px "TeX Gyre Heros Cn"; letter-spacing: .1em; margin-top: 4px; }
+.feel { left: 14px; top: 14px; font: 700 19px "TeX Gyre Heros Cn"; letter-spacing: .12em; }
+.stal { left: 10px; top: 34px; font: 900 italic 46px/1 "Inter Display"; letter-spacing: -.03em; transform-origin: 30% 60%; animation: slam 4s infinite;
+  -webkit-text-stroke: 1.5px #000; filter: drop-shadow(0 3px 0 #000) drop-shadow(0 0 10px rgba(255,210,63,.7)); }
+@keyframes slam { 0% { transform: scale(2.6); opacity: 0 } 6% { transform: scale(.94); opacity: 1 } 8% { transform: scale(1.04) translateX(-3px) } 10% { transform: scale(1) translateX(3px) } 12%, 100% { transform: scale(1) } }
+.checks { left: 16px; top: 92px; font: 700 15px/21px "TeX Gyre Heros Cn"; letter-spacing: .02em; }
+.checks div { opacity: 0; }
+.checks div::before { content: "✔ "; color: #3dff8f; font-family: "DejaVu Sans"; }
+.checks .k1 { animation: in1 4s infinite; } .checks .k2 { animation: in2 4s infinite; } .checks .k3 { animation: in3 4s infinite; } .checks .k4 { animation: in4 4s infinite; }
+@keyframes in1 { 0%, 14% { opacity: 0; transform: translateX(-20px) } 18%, 100% { opacity: 1; transform: none } }
+@keyframes in2 { 0%, 21% { opacity: 0; transform: translateX(-20px) } 25%, 100% { opacity: 1; transform: none } }
+@keyframes in3 { 0%, 28% { opacity: 0; transform: translateX(-20px) } 32%, 100% { opacity: 1; transform: none } }
+@keyframes in4 { 0%, 35% { opacity: 0; transform: translateX(-20px) } 39%, 100% { opacity: 1; transform: none } }
+.wink { left: 18px; top: 176px; font: 25px "TeX Gyre Chorus"; color: #ff7ac0; text-shadow: 0 0 8px #ff1d8e; opacity: 0; animation: wink 4s infinite; }
+@keyframes wink { 0%, 46% { opacity: 0; transform: rotate(-6deg) scale(.6) } 52%, 100% { opacity: 1; transform: rotate(-6deg) scale(1) } }
+.btn { left: 14px; top: 208px; width: 168px; height: 26px; border-radius: 13px; background: linear-gradient(180deg, #ffe680, #f5b400 55%, #b77d00); color: #1a0e00; text-align: center; font: 700 14px/26px "TeX Gyre Heros Cn"; letter-spacing: .1em; animation: pulse .5s ease-in-out infinite alternate; }
+@keyframes pulse { from { box-shadow: 0 0 0 rgba(255,210,63,0) } to { box-shadow: 0 0 14px rgba(255,210,63,.9) } }
+.pkg { left: 190px; top: 206px; width: 104px; font: 700 9px/11px "TeX Gyre Heros Cn"; color: #bcd3ff; text-align: center; }
+.fine { left: 0; right: 0; bottom: 3px; text-align: center; }
+</style></head><body>
+<img class="abs head" src="../../img/src/sil/head.svg" alt="">
+<svg class="abs bolt" viewBox="0 0 60 120"><path d="M34 0 L8 66 H28 L18 120 L54 44 H33 L46 0Z" fill="#fff"/></svg>
+<div class="abs bottle"><div class="abs body"></div><div class="abs cap"></div>
+  <div class="abs label"><div class="a">CHONGTOR</div><div class="b">POWER</div><div class="c">60 CAPS · HERBAL</div></div></div>
+<div class="abs feel">FEEL LIKE A</div>
+<div class="abs stal gold">STALLION</div>
+<div class="abs checks"><div class="k1">More energy</div><div class="k2">More stamina</div><div class="k3">More confidence</div><div class="k4">100% herbal*</div></div>
+<div class="abs wink">She'll notice.</div>
+<div class="abs btn">ORDER DISCREETLY</div>
+<div class="abs pkg">Plain packaging<br>Cash on delivery</div>
+<div class="abs fine">*Herbal supplement. Not evaluated by anyone. Results not typical. 18+</div>
+<div class="abs flash"></div>
+</body></html>
