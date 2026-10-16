@@ -5,16 +5,25 @@
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <title>{{title}}</title>
 <meta name="description" content="{{desc}}">
-<link rel="canonical" href="{{canonical}}">
+{{robots}}<link rel="canonical" href="{{canonical}}">
+<meta name="theme-color" content="#0c0a12">
 <meta property="og:site_name" content="JARYSH">
-<meta property="og:type" content="website">
-<meta property="og:title" content="{{title}}">
+<meta property="og:locale" content="en_US">
+<meta property="og:type" content="{{og_type}}">
+<meta property="og:title" content="{{og_title}}">
 <meta property="og:description" content="{{desc}}">
 <meta property="og:url" content="{{canonical}}">
 <meta property="og:image" content="{{og_image}}">
+<meta property="og:image:alt" content="{{og_alt}}">
 <meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:title" content="{{og_title}}">
+<meta name="twitter:description" content="{{desc}}">
+<meta name="twitter:image" content="{{og_image}}">
 <link rel="icon" href="{{rel}}favicon.svg" type="image/svg+xml">
-<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="icon" href="{{rel}}favicon-32.png" sizes="32x32" type="image/png">
+<link rel="apple-touch-icon" href="{{rel}}apple-touch-icon.png">
+<link rel="manifest" href="{{rel}}site.webmanifest">
+{{extra_head}}<link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Anton&family=Oswald:wght@400;600;700&family=Roboto+Condensed:ital,wght@0,400;0,700;1,400&display=swap" rel="stylesheet">
 <link rel="stylesheet" href="{{rel}}assets/jarysh.css">

@@ -1,4 +1,5 @@
 headline: TALAS 7, SARY-BULAK 4: FOUR FROM FOUR AND THE HIPPODROME GOES NUTS
+title: Talas 7, Sary-Bulak 4: Four From Four at the Hippodrome
 date: 2026-10-11
 tag: ROUND 5
 image: hero.jpg

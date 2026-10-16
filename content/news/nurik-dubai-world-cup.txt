@@ -1,4 +1,5 @@
 headline: "JUST FRIENDS": NURIK ON THAT DUBAI PHOTO
+title: "Just Friends": Nurik on That Dubai World Cup Photo
 date: 2019-04-02
 tag: ARCHIVE
 image: ceo.jpg

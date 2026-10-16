@@ -178,3 +178,4 @@ aside table.t td:nth-child(2) { line-height: 1.25; }
 .split img { width: 100%; height: auto; display: block; }
 .pair img { height: 340px; object-fit: cover; object-position: center 25%; }
 @media (max-width: 700px) { .tagline { display: none; } .logo img { width: 220px; height: auto; } }
+.h1like { color: #fff; text-shadow: 3px 3px 0 var(--red); margin: 0 0 6px; }

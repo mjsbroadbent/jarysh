@@ -1,4 +1,8 @@
 User-agent: *
 Allow: /
+# build sources, not pages
+Disallow: /tools/
+Disallow: /content/
+Disallow: /img/src/
 
 Sitemap: https://jarysh.com/sitemap.xml

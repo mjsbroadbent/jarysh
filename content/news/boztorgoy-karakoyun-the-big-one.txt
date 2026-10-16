@@ -1,4 +1,5 @@
 headline: THE BIG ONE: BOZTORGOY v KARAKOYUN, TWO UNBEATEN CLANS, ONE GOAT
+title: Boztorgoy v Karakoyun: Two Unbeaten Clans, One Goat
 date: 2026-10-15
 tag: HIGHLAND
 image: highland.jpg
