@@ -1,0 +1,416 @@
+{
+ "round_done": 5,
+ "next_round": 6,
+ "next_date": "2026-10-17",
+ "isez": [
+  [
+   "Talas",
+   4,
+   4,
+   0,
+   0,
+   26,
+   13
+  ],
+  [
+   "Chu",
+   5,
+   3,
+   2,
+   0,
+   31,
+   25
+  ],
+  [
+   "Iyık Janyl",
+   5,
+   3,
+   1,
+   1,
+   32,
+   26
+  ],
+  [
+   "Nurzhan",
+   5,
+   3,
+   0,
+   2,
+   27,
+   24
+  ],
+  [
+   "Kara-Bulak",
+   4,
+   3,
+   0,
+   1,
+   25,
+   19
+  ],
+  [
+   "Kyzyl-Adyr",
+   4,
+   2,
+   1,
+   1,
+   22,
+   21
+  ],
+  [
+   "Lower Naryn",
+   5,
+   2,
+   0,
+   3,
+   24,
+   28
+  ],
+  [
+   "Dastgoh",
+   5,
+   1,
+   1,
+   3,
+   23,
+   27
+  ],
+  [
+   "Köhne Diz",
+   5,
+   1,
+   0,
+   4,
+   22,
+   30
+  ],
+  [
+   "Sary-Bulak",
+   5,
+   1,
+   0,
+   4,
+   21,
+   30
+  ],
+  [
+   "Semiz",
+   5,
+   0,
+   1,
+   4,
+   22,
+   32
+  ]
+ ],
+ "highland": [
+  [
+   "Boztorgoy",
+   5,
+   5,
+   0,
+   0,
+   30,
+   15
+  ],
+  [
+   "Karakoyun",
+   5,
+   5,
+   0,
+   0,
+   35,
+   18
+  ],
+  [
+   "Tanıp",
+   4,
+   3,
+   1,
+   0,
+   30,
+   19
+  ],
+  [
+   "Karatau Select",
+   4,
+   3,
+   0,
+   1,
+   25,
+   19
+  ],
+  [
+   "Chatkal Highlands Select",
+   5,
+   2,
+   1,
+   2,
+   25,
+   26
+  ],
+  [
+   "Kökjal",
+   5,
+   2,
+   0,
+   3,
+   21,
+   25
+  ],
+  [
+   "Akjele",
+   4,
+   2,
+   0,
+   2,
+   18,
+   19
+  ],
+  [
+   "Sarybagysh",
+   5,
+   1,
+   1,
+   3,
+   20,
+   27
+  ],
+  [
+   "Naiman",
+   4,
+   1,
+   1,
+   2,
+   17,
+   19
+  ],
+  [
+   "Chubar (Highland)",
+   4,
+   1,
+   0,
+   3,
+   15,
+   22
+  ],
+  [
+   "Aksay Plateau Select",
+   4,
+   0,
+   1,
+   3,
+   14,
+   21
+  ],
+  [
+   "Northern Steppe Select",
+   4,
+   0,
+   1,
+   3,
+   13,
+   22
+  ],
+  [
+   "Moiynkum Select",
+   3,
+   0,
+   0,
+   3,
+   10,
+   21
+  ]
+ ],
+ "results": [
+  [
+   "isez",
+   "Talas",
+   7,
+   4,
+   "Sary-Bulak"
+  ],
+  [
+   "isez",
+   "Semiz",
+   5,
+   5,
+   "Iyık Janyl"
+  ],
+  [
+   "isez",
+   "Chu",
+   6,
+   6,
+   "Kyzyl-Adyr"
+  ],
+  [
+   "isez",
+   "Nurzhan",
+   6,
+   3,
+   "Köhne Diz"
+  ],
+  [
+   "isez",
+   "Lower Naryn",
+   6,
+   4,
+   "Dastgoh"
+  ],
+  [
+   "hl",
+   "Akjele",
+   3,
+   5,
+   "Boztorgoy"
+  ],
+  [
+   "hl",
+   "Karakoyun",
+   6,
+   4,
+   "Kökjal"
+  ],
+  [
+   "hl",
+   "Tanıp",
+   7,
+   5,
+   "Karatau Select"
+  ],
+  [
+   "hl",
+   "Chatkal Highlands Select",
+   6,
+   3,
+   "Sarybagysh"
+  ],
+  [
+   "hl",
+   "Moiynkum Select",
+   null,
+   null,
+   "Northern Steppe Select"
+  ],
+  [
+   "hl",
+   "Naiman",
+   null,
+   null,
+   "Chubar (Highland)"
+  ]
+ ],
+ "fixtures": [
+  [
+   "isez",
+   "Talas",
+   "Kara-Bulak",
+   "State Hippodrome, Talas",
+   "19:00",
+   1.55,
+   4.6,
+   2.4
+  ],
+  [
+   "isez",
+   "Iyık Janyl",
+   "Chu",
+   "Cathedral Field, Iyık Janyl",
+   "17:00",
+   2.1,
+   4.2,
+   2.9
+  ],
+  [
+   "isez",
+   "Sary-Bulak",
+   "Semiz",
+   "Sary-Bulak",
+   "16:00",
+   1.9,
+   4.4,
+   3.3
+  ],
+  [
+   "isez",
+   "Köhne Diz",
+   "Lower Naryn",
+   "State Hippodrome, Talas",
+   "21:00",
+   2.6,
+   4.3,
+   2.3
+  ],
+  [
+   "isez",
+   "Kyzyl-Adyr",
+   "Nurzhan",
+   "Kyzyl-Adyr",
+   "16:00",
+   2.5,
+   4.0,
+   2.5
+  ],
+  [
+   "hl",
+   "Boztorgoy",
+   "Karakoyun",
+   "Moiynkum winter grounds",
+   "15:00",
+   2.2,
+   4.5,
+   2.6
+  ],
+  [
+   "hl",
+   "Karatau Select",
+   "Chatkal Highlands Select",
+   "Karatau",
+   "14:00",
+   1.8,
+   4.6,
+   3.5
+  ],
+  [
+   "hl",
+   "Kökjal",
+   "Tanıp",
+   "Toktogul basin",
+   "14:00",
+   3.1,
+   4.4,
+   1.9
+  ],
+  [
+   "hl",
+   "Sarybagysh",
+   "Akjele",
+   "Chatkal valley",
+   "14:00",
+   2.4,
+   4.2,
+   2.6
+  ],
+  [
+   "hl",
+   "Aksay Plateau Select",
+   "Naiman",
+   "Aksay Plateau",
+   "13:00",
+   2.3,
+   4.3,
+   2.7
+  ],
+  [
+   "hl",
+   "Northern Steppe Select",
+   "Moiynkum Select",
+   "Northern Steppe",
+   "13:00",
+   2.8,
+   4.1,
+   2.2
+  ]
+ ]
+}
