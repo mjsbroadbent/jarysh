@@ -41,7 +41,7 @@ def can():
     from PIL import ImageFont
     G = "/usr/share/texmf/fonts/opentype/public/tex-gyre/"
     d = ImageDraw.Draw(flat)
-    d.text((cx, 585), "IRADIAN GOLD LAGER", font=ImageFont.truetype(G + "texgyreheroscn-bold.otf", 22), fill=(70, 38, 6, 235), anchor="mm")
+    d.text((cx, 585), "IRADI GOLD LAGER", font=ImageFont.truetype(G + "texgyreheroscn-bold.otf", 22), fill=(70, 38, 6, 235), anchor="mm")
     d.text((cx, 775), "RIDE HARD. DRINK AIGYR.", font=ImageFont.truetype(G + "texgyreheroscn-bold.otf", 22), fill=(70, 38, 6, 235), anchor="mm")
     d.text((cx, 805), "4.8% ALC/VOL · 500 ml · BREWED IN KARA-BULAK", font=ImageFont.truetype(G + "texgyreheroscn-regular.otf", 15), fill=(70, 38, 6, 220), anchor="mm")
     # cylinder wrap: output x sees flat label at cx + R * asin(t) * (2 / pi) ... scaled so the centre is 1:1

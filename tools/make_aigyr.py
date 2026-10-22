@@ -60,7 +60,7 @@ def wordmark_body(x=0, y=150, size=168, light=False):
     sw_y = y + 22
     swash = (f'<path d="M{x + 10},{sw_y} C{x + w * .35},{sw_y + 40} {x + w * .75},{sw_y + 26} {x + w + 40},{sw_y - 30} '
              f'C{x + w * .78},{sw_y + 4} {x + w * .4},{sw_y + 12} {x + 10},{sw_y}Z"/>')
-    tl, tw = text_path("heroscn-b", "IRADIAN GOLD LAGER", 24, tracking=240)
+    tl, tw = text_path("heroscn-b", "IRADI GOLD LAGER", 24, tracking=240)
     tag = f'<path d="{tl}" transform="translate({x + (w - tw) / 2 + 14:.1f} {sw_y + 52})"/>'
     fill = "#fff4dc" if light else "url(#ag)"
     return (f'<g><path d="{d}" fill="none" stroke="#000" stroke-opacity=".55" stroke-width="10" transform="translate(3 5)"/>'

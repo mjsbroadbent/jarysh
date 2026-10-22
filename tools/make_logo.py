@@ -16,7 +16,7 @@ GOLD = """<linearGradient id="gold" x1="0" y1="0" x2="0" y2="1">
 <stop offset=".72" stop-color="#ffe27a"/><stop offset="1" stop-color="#9a6200"/></linearGradient>
 <linearGradient id="shine" x1="0" y1="0" x2="1" y2="0">
 <stop offset="0" stop-color="#fff" stop-opacity="0"/><stop offset=".5" stop-color="#fff" stop-opacity=".95"/><stop offset="1" stop-color="#fff" stop-opacity="0"/></linearGradient>
-<filter id="bevel" x="-5%" y="-5%" width="110%" height="110%">
+<filter id="bevel" x="-15%" y="-15%" width="130%" height="130%">
 <feGaussianBlur in="SourceAlpha" stdDeviation="2.2" result="b"/>
 <feSpecularLighting in="b" surfaceScale="4" specularConstant=".9" specularExponent="22" lighting-color="#fff6d0" result="s">
 <fePointLight x="120" y="-160" z="220"/></feSpecularLighting>
