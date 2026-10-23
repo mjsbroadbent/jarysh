@@ -1,11 +1,14 @@
 #!/usr/bin/env python3
 """Builds jarysh.com.   python3 tools/build.py
 
-content/league.json   tables, last round's results, next round's fixtures with odds
+data/ulak-2026.json   the season: conferences and grounds, records from rounds 1-4 ("before"), every round from 5
+                      with its matches (score once the sheet is in, odds for the coming round, optional "boost")
 content/pages/*.html  pages: "key: value" header, blank line, HTML body with placeholders
 content/news/*.txt    news: header (headline, date, image, tag, summary), blank line, paragraphs
-Placeholders: {{isez_table}} {{hl_table}} {{results_isez}} {{results_hl}} {{odds_isez}} {{odds_hl}}
-{{news_cards}} {{news_list}} {{next_date}} {{rel}}
+Placeholders (body and header): {{isez_table}} {{hl_table}} {{results_isez}} {{results_hl}} {{odds_isez}} {{odds_hl}}
+{{news_cards}} {{round_done}} {{done_date}} {{next_round}} {{next_date}} {{byes_isez}} {{byes_hl}} {{late_hl}}
+{{hero_match}} {{hero_time}} {{nights_card}} {{boost}} {{rel}}
+The latest round is the last one with a score in; the next round is the first one from today (Irad Time) with none.
 """
 import html, json, re, datetime
 from pathlib import Path
@@ -13,7 +16,14 @@ from pathlib import Path
 ROOT = Path(__file__).resolve().parent.parent
 SITE = "https://jarysh.com/"
 BUILT = "2026-10-16"   # lastmod for the static pages; bump when they change
-L = json.loads((ROOT / "content" / "league.json").read_text(encoding="utf-8"))
+U = json.loads((ROOT / "data" / "ulak-2026.json").read_text(encoding="utf-8"))
+TODAY = (datetime.datetime.now(datetime.timezone.utc) + datetime.timedelta(hours=6)).date().isoformat()   # Irad Time
+LR = None
+for _r in U["rounds"]:
+    if any(_m.get("score") is not None for _m in _r["matches"]):
+        LR = _r
+NR = next((_r for _r in U["rounds"] if _r["date"] >= TODAY and all(_m.get("score") is None for _m in _r["matches"])), None)
+HIPPO = "State Hippodrome"
 MONTHS = "January February March April May June July August September October November December".split()
 esc = lambda s: html.escape(str(s), quote=True)
 nice = lambda d: f"{d.day} {MONTHS[d.month - 1]} {d.year}"
@@ -52,6 +62,18 @@ def paras(body):
     return "\n".join(out)
 
 
+def standings(conf):
+    """Records from rounds 1-4 plus every score in since: [name, P, W, D, L, GF, GA]."""
+    rows = {t["name"]: [t["name"], *U["before"][conf].get(t["name"], [0] * 6)] for t in U["conferences"][conf]["teams"]}
+    for r in U["rounds"]:
+        for m in r["matches"]:
+            if m["conf"] != conf or m.get("score") is None:
+                continue
+            for t, f, g in ((m["home"], *m["score"]), (m["away"], m["score"][1], m["score"][0])):
+                x = rows[t]; x[1] += 1; x[5] += f; x[6] += g; x[2 if f > g else 3 if f == g else 4] += 1
+    return list(rows.values())
+
+
 def table(rows):
     srt = sorted(rows, key=lambda t: (-(3 * t[2] + t[3]), -(t[5] - t[6]), -t[5]))
     tr = []
@@ -65,30 +87,96 @@ def table(rows):
 
 def results(conf):
     li = []
-    for c, h, a, b, aw in L["results"]:
-        if c != conf:
+    for m in (LR["matches"] if LR else []):
+        if m["conf"] != conf:
             continue
+        a, b = m["score"] if m.get("score") is not None else (None, None)
         sc = f'<span class="sc">{a} – {b}</span>' if a is not None else '<span class="nr">NOT RECEIVED</span>'
-        li.append(f'<li><span class="h">{esc(h)}</span>{sc}<span>{esc(aw)}</span></li>')
+        li.append(f'<li><span class="h">{esc(m["home"])}</span>{sc}<span>{esc(m["away"])}</span></li>')
     return '<ul class="res">' + "".join(li) + "</ul>"
+
+
+def byes(rnd, conf):
+    if not rnd:
+        return ""
+    playing = {t for m in rnd["matches"] if m["conf"] == conf for t in (m["home"], m["away"])}
+    if not playing:
+        return ""
+    out = [t["name"] for t in U["conferences"][conf]["teams"] if t["name"] not in playing]
+    return ("Bye: " + ", ".join(out) + ".") if out else ""
+
+
+def late_note(conf):
+    n = sum(1 for m in (LR["matches"] if LR else []) if m["conf"] == conf and m.get("score") is None)
+    if not n:
+        return ""
+    words = {1: "One result", 2: "Two results", 3: "Three results"}.get(n, f"{n} results")
+    return f" {words} not yet received from the Directorate's match commissioners. Phone lines in the Moiynkum are, as usual, a disaster."
 
 
 def odds(conf):
     tr = []
-    for c, h, a, venue, time, oh, od, oa in L["fixtures"]:
-        if c != conf:
+    for m in (NR["matches"] if NR else []):
+        if m["conf"] != conf:
             continue
-        tr.append(f'<tr><td>{time}</td><td>{esc(h)} <span style="color:var(--muted)">v</span> {esc(a)}<br><span class="tiny">{esc(venue)}</span></td>'
-                  f'<td><a class="odds" href="#partner">{oh:.2f}</a></td><td><a class="odds" href="#partner">{od:.2f}</a></td><td><a class="odds" href="#partner">{oa:.2f}</a></td></tr>')
+        o = m.get("odds") or [None] * 3
+        cell = lambda x: f'<td><a class="odds" href="#partner">{x:.2f}</a></td>' if x else "<td>&ndash;</td>"  # noqa: E731
+        tr.append(f'<tr><td>{m["time"]}</td><td>{esc(m["home"])} <span style="color:var(--muted)">v</span> {esc(m["away"])}<br><span class="tiny">{esc(m["venue"])}</span></td>'
+                  + "".join(cell(x) for x in o) + "</tr>")
+    if not tr:
+        return '<p class="tiny">No league games this weekend. The play-off is at the State Hippodrome in December.</p>'
     return '<table class="t"><tr><th>TIME</th><th>MATCH</th><th>HOME</th><th>DRAW</th><th>AWAY</th></tr>' + "".join(tr) + "</table>"
+
+
+def hippodrome(rnd):
+    return sorted([m for m in (rnd["matches"] if rnd else []) if m["venue"].startswith(HIPPO)], key=lambda m: m["time"])
+
+
+def hero():
+    hm = hippodrome(NR)
+    if hm:
+        return f'{hm[0]["home"]} v {hm[0]["away"]}', hm[0]["time"]
+    if NR:
+        m = NR["matches"][0]
+        return f'{m["home"]} v {m["away"]}', m["time"]
+    return "The play-off", "19:00"
+
+
+def nights_card():
+    hm = hippodrome(NR)
+    if not hm:
+        return "<p>No league game at the Hippodrome this Saturday. The bars are open anyway.</p>"
+    games = " &middot; ".join((f'<b>{m["time"]} {esc(m["home"])} v {esc(m["away"])}</b>' if i == 0 else f'{m["time"]} {esc(m["home"])} v {esc(m["away"])}')
+                              for i, m in enumerate(hm))
+    return (f"<p>{games} &middot; Half-time: the <b>Aigyr Fan Pull</b> (amateurs grab a 20-kilo leather goat on foot, winner gets a crate) "
+            "&middot; 22:30 live on the stage &middot; 00:00 buses to <b>Club Doran</b>.</p>")
+
+
+def boost():
+    b = NR and NR.get("boost")
+    if not b:
+        return ""
+    q = f'<p>"{esc(b["quote"])}" <b>Nurik</b></p>' if b.get("quote") else ""
+    return (f'<div class="boost"><span class="kick" style="background:var(--pink);color:#fff;font:700 12px Oswald;padding:2px 8px">&#128293; THE NURIK BOOST OF THE WEEK</span>'
+            f'<h2 style="margin-top:8px">{esc(b["home"].upper())} v {esc(b["away"].upper())}: {esc(b["pick"])}</h2><span class="was">was {b["was"]:.2f}</span> &nbsp; <span class="now">NOW {b["now"]:.2f}</span>{q}</div>')
+
+
+def short_date(d):
+    d = datetime.date.fromisoformat(d)
+    return f"{'MON TUE WED THU FRI SAT SUN'.split()[d.weekday()]} {d.day} {MONTHS[d.month - 1][:3].upper()}"
 
 
 def ticker():
     out = []
-    for c, h, a, b, aw in L["results"]:
-        s = f"{a}–{b}" if a is not None else "n/r"
-        out.append(f'<span>{esc(h)} <b>{s}</b> {esc(aw)}</span>')
-    out.append('<span>&#9733; ROUND 6 SAT 17 OCT: TALAS v KARA-BULAK, 19:00, STATE HIPPODROME &#9733;</span><span>BOZTORGOY v KARAKOYUN: THE BIG ONE &#128293;</span><span>AIGYR GOLD 2-FOR-1 ON THE BEER DECK TILL 20:00</span>')
+    for m in (LR["matches"] if LR else []):
+        s = f'{m["score"][0]}–{m["score"][1]}' if m.get("score") is not None else "n/r"
+        out.append(f'<span>{esc(m["home"])} <b>{s}</b> {esc(m["away"])}</span>')
+    if NR:
+        hm, tm = hero()
+        out.append(f'<span>&#9733; ROUND {NR["round"]} {short_date(NR["date"])}: {esc(" v ".join(x.upper() for x in hm.split(" v ")))}, {tm}, STATE HIPPODROME &#9733;</span>')
+        if NR.get("boost"):
+            out.append(f'<span>{esc(NR["boost"]["home"].upper())} v {esc(NR["boost"]["away"].upper())}: THE NURIK BOOST &#128293;</span>')
+    out.append('<span>AIGYR GOLD 2-FOR-1 ON THE BEER DECK TILL 20:00</span>')
     return "".join(out)
 
 
@@ -108,7 +196,7 @@ def page(path, title, body, desc, depth, og=None, bodyclass="", og_title=None, o
            .replace("{{robots}}", '<meta name="robots" content="noindex, follow">\n' if noindex else "")
            .replace("{{extra_head}}", extra)
            .replace("{{og_image}}", SITE + (og or "img/og.jpg")).replace("{{bodyclass}}", bodyclass)
-           .replace("{{ticker}}", ticker()).replace("{{body}}", body).replace("{{rel}}", rel))
+           .replace("{{ticker}}", ticker()).replace("{{ticker_label}}", f'ROUND {LR["round"]} &#9679; FT' if LR else "ULAK").replace("{{body}}", body).replace("{{rel}}", rel))
     # sidebar and in-page ads load lazily; the header leaderboard does not
     out = re.sub(r'(<div class="ad"><a [^>]*><img )', r'\1loading="lazy" decoding="async" ', out)
     t = ROOT / path
@@ -134,13 +222,14 @@ def crumbs(*items):
 
 def fixtures_ld():
     out = []
-    for c, h, a, venue, time, *_ in L["fixtures"]:
+    for m in (NR["matches"] if NR else []):
+        h, a = m["home"], m["away"]
         out.append({"@type": "SportsEvent", "name": f"{h} v {a}", "sport": "Ulak tartysh (kok-boru)",
-                    "startDate": f'{L["next_date"]}T{time}:00{TZ}', "eventStatus": "https://schema.org/EventScheduled",
+                    "startDate": f'{NR["date"]}T{m["time"]}:00{TZ}', "eventStatus": "https://schema.org/EventScheduled",
                     "eventAttendanceMode": "https://schema.org/OfflineEventAttendanceMode",
-                    "location": {"@type": "Place", "name": venue},
+                    "location": {"@type": "Place", "name": m["venue"]},
                     "homeTeam": {"@type": "SportsTeam", "name": h}, "awayTeam": {"@type": "SportsTeam", "name": a},
-                    "superEvent": {"@type": "SportsEvent", "name": "National Ulak Tartysh League 2026, Round 6"}})
+                    "superEvent": {"@type": "SportsEvent", "name": f"National Ulak Tartysh League {U['season']}, Round {NR['round']}"}})
     return out
 
 
@@ -152,14 +241,15 @@ def page_ld(stem, m, canonical):
     ld = [crumbs(home, (name, canonical)),
           {"@type": "WebPage", "@id": canonical, "url": canonical, "name": m.get("title", m["headline"]), "description": m.get("dek", ""),
            "isPartOf": {"@id": SITE_ID}, "inLanguage": "en"}]
-    if stem == "ulak-nights":
-        nd = L["next_date"]
-        ld.append({"@type": "Event", "name": "Aigyr Ulak Nights: Talas v Kara-Bulak", "startDate": f"{nd}T17:30:00{TZ}",
+    if stem == "ulak-nights" and NR:
+        nd, (hm, _t) = NR["date"], hero()
+        teams_ = hm.split(" v ")
+        ld.append({"@type": "Event", "name": f"Aigyr Ulak Nights: {hm}", "startDate": f"{nd}T17:30:00{TZ}",
                    "endDate": f"{nd}T23:59:00{TZ}", "eventStatus": "https://schema.org/EventScheduled",
                    "eventAttendanceMode": "https://schema.org/OfflineEventAttendanceMode", "location": HIPPODROME,
                    "image": [SITE + "img/crowd.jpg", SITE + "img/hero.jpg"], "organizer": {"@id": ORG_ID},
-                   "description": "Round 6 of the National Ulak Tartysh League under the lights, the Aigyr Beer Deck and the afterparty. Gates 17:30, first game 19:00.",
-                   "performer": [{"@type": "SportsTeam", "name": "Talas"}, {"@type": "SportsTeam", "name": "Kara-Bulak"}]})
+                   "description": f"Round {NR['round']} of the National Ulak Tartysh League under the lights, the Aigyr Beer Deck and the afterparty. Gates 17:30, first game 19:00.",
+                   "performer": [{"@type": "SportsTeam", "name": t} for t in teams_]})
     elif stem in ("scores", "odds"):
         ld += fixtures_ld()
     elif stem == "aigyr":
@@ -222,12 +312,20 @@ def main():
 
     for p in sorted((ROOT / "content" / "pages").glob("*.html")):
         m = parse(p)
-        rep = {"{{isez_table}}": table(L["isez"]), "{{hl_table}}": table(L["highland"]), "{{results_isez}}": results("isez"),
+        hm, ht = hero()
+        rep = {"{{isez_table}}": table(standings("isez")), "{{hl_table}}": table(standings("hl")), "{{results_isez}}": results("isez"),
                "{{results_hl}}": results("hl"), "{{odds_isez}}": odds("isez"), "{{odds_hl}}": odds("hl"),
-               "{{news_cards}}": cards("", news[:6]), "{{next_date}}": nice(datetime.date.fromisoformat(L["next_date"]))}
+               "{{news_cards}}": cards("", news[:6]),
+               "{{round_done}}": str(LR["round"]) if LR else "", "{{done_date}}": nice(datetime.date.fromisoformat(LR["date"])).rsplit(" ", 1)[0] if LR else "",
+               "{{next_round}}": str(NR["round"]) if NR else "PLAY-OFF", "{{next_date}}": nice(datetime.date.fromisoformat(NR["date"])) if NR else "December",
+               "{{byes_isez}}": byes(LR, "isez"), "{{byes_hl}}": byes(LR, "hl"), "{{late_hl}}": late_note("hl"),
+               "{{hero_match}}": esc(hm), "{{hero_time}}": ht, "{{nights_card}}": nights_card(), "{{boost}}": boost()}
         body = m["body"]
         for k, v in rep.items():
             body = body.replace(k, v)
+            for f in ("title", "headline", "dek"):
+                if f in m:
+                    m[f] = m[f].replace(k, re.sub(r"<[^>]+>", "", v))
         path = f"{p.stem}.html"
         noindex = m.get("noindex") == "yes"
         canonical = SITE + ("" if path == "index.html" else path)
