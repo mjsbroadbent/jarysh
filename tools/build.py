@@ -7,7 +7,7 @@ content/pages/*.html  pages: "key: value" header, blank line, HTML body with pla
 content/news/*.txt    news: header (headline, date, image, tag, summary), blank line, paragraphs
 Placeholders (body and header): {{isez_table}} {{hl_table}} {{results_isez}} {{results_hl}} {{odds_isez}} {{odds_hl}}
 {{news_cards}} {{round_done}} {{done_date}} {{next_round}} {{next_date}} {{byes_isez}} {{byes_hl}} {{late_hl}}
-{{hero_match}} {{hero_time}} {{nights_card}} {{boost}} {{rel}}
+{{hero_match}} {{hero_time}} {{nights_card}} {{boost}} {{playoff}} {{rel}}
 The latest round is the last one with a score in; the next round is the first one from today (Irad Time) with none.
 """
 import html, json, re, datetime
@@ -126,6 +126,29 @@ def odds(conf):
     if not tr:
         return '<p class="tiny">No league games this weekend. The play-off is at the State Hippodrome in December.</p>'
     return '<table class="t"><tr><th>TIME</th><th>MATCH</th><th>HOME</th><th>DRAW</th><th>AWAY</th></tr>' + "".join(tr) + "</table>"
+
+
+def playoff():
+    po = U.get("playoff") or {}
+    if not po.get("rounds"):
+        return ""
+    names = {"isez": "ISEZ", "hl": "Highland"}
+    def side(m, k):
+        if m.get(k):
+            return esc(m[k])
+        kind, v = (m.get("seed_" + k) or "?:?").split(":")
+        if kind == "win":
+            return f'<span style="color:var(--muted)">Winner SF{v[-1]}</span>'
+        return f'<span style="color:var(--muted)">{names.get(kind, kind)} {v}{ {"1": "st", "2": "nd"}.get(v, "th") }</span>'
+    li = []
+    for r in po["rounds"]:
+        li.append(f'<li style="display:block;list-style:none;margin:10px 0 4px;border:0"><b>{esc(r["name"].upper())}</b> <span class="tiny">&middot; Saturday {nice(datetime.date.fromisoformat(r["date"]))}</span></li>')
+        for m in r["matches"]:
+            sc = (f'<span class="sc">{m["score"][0]} – {m["score"][1]}</span>' + ('<span class="tiny"> GG</span>' if m.get("golden_goal") else "")
+                  if m.get("score") is not None else f'<span class="sc" style="background:none;color:var(--muted)">{m["time"]}</span>')
+            li.append(f'<li><span class="h">{side(m, "home")}</span>{sc}<span>{side(m, "away")}</span></li>')
+    return (f'<div class="box"><h2>PLAY-OFF: {esc(po.get("venue", "State Hippodrome").upper())}</h2>'
+            f'<p class="tiny">{esc(po.get("note", ""))} GG = golden goal.</p><ul class="res">' + "".join(li) + "</ul></div>")
 
 
 def hippodrome(rnd):
@@ -319,7 +342,8 @@ def main():
                "{{round_done}}": str(LR["round"]) if LR else "", "{{done_date}}": nice(datetime.date.fromisoformat(LR["date"])).rsplit(" ", 1)[0] if LR else "",
                "{{next_round}}": str(NR["round"]) if NR else "PLAY-OFF", "{{next_date}}": nice(datetime.date.fromisoformat(NR["date"])) if NR else "December",
                "{{byes_isez}}": byes(LR, "isez"), "{{byes_hl}}": byes(LR, "hl"), "{{late_hl}}": late_note("hl"),
-               "{{hero_match}}": esc(hm), "{{hero_time}}": ht, "{{nights_card}}": nights_card(), "{{boost}}": boost()}
+               "{{hero_match}}": esc(hm), "{{hero_time}}": ht, "{{nights_card}}": nights_card(), "{{boost}}": boost(),
+               "{{playoff}}": playoff()}
         body = m["body"]
         for k, v in rep.items():
             body = body.replace(k, v)

@@ -124,8 +124,51 @@
   }
  },
  "playoff": {
-  "note": "Top two in each conference: play-off at the State Hippodrome in December; fixtures once the conferences are complete.",
-  "matches": []
+  "note": "Top two in each conference meet at the State Hippodrome: semi-finals crossed between the conferences, then the final. A level score goes to a golden-goal extra period. Seeds are filled in once each conference is complete.",
+  "venue": "State Hippodrome, Talas",
+  "rounds": [
+   {
+    "key": "sf",
+    "name": "Semi-finals",
+    "date": "2026-12-12",
+    "matches": [
+     {
+      "id": "sf1",
+      "seed_home": "isez:1",
+      "seed_away": "hl:2",
+      "home": null,
+      "away": null,
+      "time": "17:00",
+      "score": null
+     },
+     {
+      "id": "sf2",
+      "seed_home": "hl:1",
+      "seed_away": "isez:2",
+      "home": null,
+      "away": null,
+      "time": "19:30",
+      "score": null
+     }
+    ]
+   },
+   {
+    "key": "final",
+    "name": "Final",
+    "date": "2026-12-19",
+    "matches": [
+     {
+      "id": "final",
+      "seed_home": "win:sf1",
+      "seed_away": "win:sf2",
+      "home": null,
+      "away": null,
+      "time": "19:00",
+      "score": null
+     }
+    ]
+   }
+  ]
  },
  "before": {
   "isez": {
