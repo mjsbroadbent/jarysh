@@ -198,13 +198,13 @@ body.lbx-open .visitor { display: none; }
 
 /* wall calendar (assets/calendar.js) */
 @property --c { syntax: '<length>'; inherits: true; initial-value: 0px; }
-.cal { position: fixed; inset: 0; z-index: 1000; background: rgba(6,4,10,.93); display: flex; flex-direction: column; align-items: center; justify-content: center; padding: 16px; }
+.cal { position: fixed; inset: 0; z-index: 1000; background: rgba(6,4,10,.93); display: flex; flex-direction: column; align-items: center; justify-content: center; padding: 10px; }
 .cal[hidden] { display: none; }
 body.cal-open { overflow: hidden; }
 body.cal-open .visitor { display: none; }
 .cal-x { position: absolute; top: 8px; right: 12px; background: none; border: 0; color: #ffd447; font-size: 40px; line-height: 1; cursor: pointer; padding: 4px 10px; }
-.cal-hint { margin-top: 12px; font: 600 13px Oswald, sans-serif; letter-spacing: .08em; text-transform: uppercase; color: #b9b2c4; }
-.cal-wall { --w: min(640px, 92vw, calc((100vh - 110px) / 1.16)); width: var(--w); position: relative; perspective: 2200px; }
+.cal-hint { margin-top: 8px; font: 600 13px Oswald, sans-serif; letter-spacing: .08em; text-transform: uppercase; color: #b9b2c4; }
+.cal-wall { --w: min(96vw, calc((100vh - 60px) / 1.165)); --w: min(96vw, calc((100dvh - 60px) / 1.165)); width: var(--w); position: relative; perspective: 2200px; margin-top: calc(var(--w) * .035); }
 .cal-hanger { height: calc(var(--w) * .06); position: relative; z-index: 60; margin-bottom: calc(var(--w) * -.03);
   background: radial-gradient(circle at 50% 30%, #d9d4c6 0 32%, #6d685e 36%, transparent 40%) 0 0 / calc(var(--w) / 22) 100% repeat-x; }
 .cal-hanger::before { content: ""; position: absolute; left: 50%; top: calc(var(--w) * -.035); width: calc(var(--w) * .07); height: calc(var(--w) * .07); transform: translateX(-50%); border: 3px solid #cfc9bb; border-bottom: 0; border-radius: 50% 50% 0 0; }
@@ -267,3 +267,25 @@ body.cal-open .visitor { display: none; }
 .calpromo h2 em { font-style: normal; color: #fff; }
 .calpromo .go { display: inline-block; margin-top: 6px; background: #f5b400; color: #0c0a12; font: 700 18px Oswald, sans-serif; letter-spacing: .06em; padding: 8px 18px; border: 0; cursor: pointer; text-transform: uppercase; }
 @media (max-width: 700px) { .calpromo { grid-template-columns: 1fr; } .calpromo img { max-width: 260px; margin: 0 auto; } .calpromo h2 { font-size: 26px; } }
+
+/* wide screens: a shorter page (the grid gives up height) so the calendar can fill the screen */
+@media (min-aspect-ratio: 5/4) {
+  .cal-wall { --w: min(96vw, 1300px, calc((100vh - 60px) / .965)); --w: min(96vw, 1300px, calc((100dvh - 60px) / .965)); }
+  .cal-stack { aspect-ratio: 1 / .9; }
+  .cal-grid { padding: 1.2cqw 4cqw 0; }
+  .cal-mh { padding-bottom: .3cqw; margin-bottom: .3cqw; }
+  .cal-mh span { font-size: 3.6cqw; }
+  .cal-mh em { font-size: 2.8cqw; }
+  .cal-dn span { font-size: 1.4cqw; padding: .1cqw .8cqw; }
+  .cal-days span { padding: .2cqw .8cqw; display: flex; align-items: baseline; gap: 1cqw; }
+  .cal-days b { font-size: 2cqw; }
+  .cal-days i { display: inline; font-size: 1.15cqw; }
+  .cal-foot { font-size: 1.3cqw; padding: .8cqw 4cqw 1cqw; }
+  .cal-hot.pv::after { font-size: 1.3cqw; bottom: .8cqw; }
+  .cal-cover { padding-top: 2.5cqw; }
+  .cal-logo { width: 34cqw; }
+  .cal-ttl { font-size: 5.4cqw; }
+  .cal-mosaic { width: 80%; gap: .8cqw; }
+  .cal-tag { font-size: 2.2cqw; }
+  .cal-cover .cal-foot img { height: 6cqw; }
+}
