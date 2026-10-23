@@ -29,6 +29,14 @@ header.top { background: linear-gradient(180deg, #221b2e, #0c0a12); border-botto
 .btn-gold, .btn-red, .btn-big { display: inline-block; font: 700 14px Oswald, sans-serif; letter-spacing: .06em; padding: 8px 14px; border-radius: 3px; text-decoration: none !important; box-shadow: 0 3px 0 rgba(0,0,0,.6); }
 .btn-gold { background: linear-gradient(#ffe066, var(--gold)); color: #1a1100 !important; }
 .btn-red { background: linear-gradient(#ff4b4b, var(--red)); color: #fff !important; }
+.btn-tulpar { display: inline-flex; align-items: center; gap: 6px; font: 700 14px Oswald, sans-serif; letter-spacing: .06em; padding: 8px 12px 8px 9px; border-radius: 3px; text-decoration: none !important; box-shadow: 0 3px 0 rgba(0,0,0,.6); background: linear-gradient(#00b4b7, #00628a); color: #fff !important; }
+.btn-tulpar img { width: 18px; height: 18px; border-radius: 4px; box-shadow: 0 0 0 1px rgba(255,255,255,.5); }
+.btn-tulpar.big { font-size: 18px; padding: 10px 16px 10px 12px; vertical-align: middle; margin-top: 8px; }
+.btn-tulpar.big img { width: 20px; height: 20px; }
+.foot-tulpar { display: inline-flex !important; align-items: center; gap: 7px; margin-top: 4px; font: 600 13px Oswald, sans-serif; letter-spacing: .06em; color: #ddd; }
+.foot-tulpar b { color: var(--gold); }
+.foot-tulpar img { width: 20px; height: 20px; border-radius: 4px; }
+.foot-tulpar.sm img { width: 16px; height: 16px; }
 .btn-big { font-size: 20px; padding: 12px 24px; background: linear-gradient(#ffe066, var(--gold)); color: #1a1100 !important; animation: pulse 1.4s ease-in-out infinite; }
 @keyframes pulse { 50% { transform: scale(1.05); box-shadow: 0 0 22px rgba(246,184,0,.7); } }
 .nav { background: #000; border-top: 1px solid var(--line); }
